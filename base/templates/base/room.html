@@ -1,0 +1,21 @@
+{% extends 'main.html' %}
+
+{% block content%}
+
+<h1 style="text-align: center;">name: {{room.name}}</h1>
+<style>
+  .main div{
+    display: inline;
+    margin-left: 260px;
+    font-size: 30px;
+  }
+</style>
+
+<div class="main">
+  <div><small>{{room.topic.name}}</small></div>
+  <div><span>@{{room.host.username}}</span></div>
+  <div><span>{{room.description}}</span></div>
+</div>
+
+
+{% endblock content %}

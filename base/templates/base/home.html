@@ -1,0 +1,131 @@
+{% extends 'main.html' %}
+
+{% block content%}
+
+
+<!-- <style>
+  .home-cont{
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+  }
+</style> -->
+
+
+
+<style>
+  .header{
+    align-items: center;
+    text-align: center;
+  }
+
+
+  .topics a{
+    color: brown;
+    text-decoration: none;
+    display:flex;
+
+  }
+
+
+  .all{
+    display: flex;
+    padding-left: 10px;
+  }
+
+  .all div{
+    margin-left: 160px;
+    font-size: 25px;
+  }
+
+
+  .hhh{
+    margin: 50px;
+  }
+
+  .hhh div{
+    display: inline;
+    
+  }
+
+
+  .tab{
+    margin-left: 160px;
+  }
+  .tab a{
+    text-decoration: none;
+    color: black;
+  }
+
+  .tab a:hover{
+    color: brown;
+  }
+
+  
+
+  
+
+
+
+</style>
+
+
+
+<div class="home-cont">
+    <div class="header">
+      <h3 style="font-size: 25px;">Programming Languages</h3>
+      <hr>
+    </div> 
+    <div class="all">
+    {% for topic in topics %}
+    <div class="topics">
+      <a href="{% url 'home' %}?q={{topic.name}}">{{topic.name}}</a>
+    </div>
+    {% endfor %}
+  
+    <p></p>
+  
+    <div class="search">
+    <form method="GET" action="{% url 'home' %}">
+      <input type="text" name="q" placeholder="Search..."/>
+    </form>
+    </div>
+    </div>
+ 
+
+
+  <div class="stud">
+    
+    <!-- <div>
+      {% for room in rooms %}
+        <div class="hhh">
+          <div>{{room.id}} . <a href="{% url 'room' room.id %}">{{room.name}}</a></div>
+          <div style="margin-left: 800px;"><a href="{% url 'update-room' room.id %}">Edit</a></div>
+          <div style="margin-left: 100px;"><a href="{% url 'delete-room' room.id %}">Delete</a></div>
+          <hr>
+        </div>
+      {% endfor %}
+    </div> -->
+<h1></h1>
+
+
+
+
+
+    {% for room in rooms %}
+    <table class="tab">
+      <tr>
+        <td>{{room.id}} . <a href="{% url 'room' room.id %}">{{room.name}}</a></td>
+        <td><a href="{% url 'update-room' room.id %}">Edit</a></td>
+        <td><a href="{% url 'delete-room' room.id %}">Delete</a></td>
+      </tr>
+      
+    </table>
+    {% endfor %}
+    <h3 style="margin-left: 160px;"><a href="{% url 'create-room' %}">Create student</a></h3>
+    <h5>{{room_count}} rooms avail</h5>
+
+  </div>
+</div>
+
+
+{% endblock content %}
