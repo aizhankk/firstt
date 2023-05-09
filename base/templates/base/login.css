@@ -1,0 +1,54 @@
+body{
+  margin: 0;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(252,188,22,255);
+}
+
+.all{
+  text-align: center;
+}
+
+.it_park{
+  margin-top: 3%;
+}
+
+.info{
+  padding: 2%;
+  align-items: center;
+  text-align: center;
+  position: absolute;
+  background-color: white;
+  width: 450px;
+  top: 45%;
+  left: 35%;
+  margin-right: -50%;
+  border-radius: 20px;
+}
+
+.info p{
+  padding: 2%;
+}
+
+#pi{
+  font-weight: bold;
+  font-size: 25px;
+
+}
+
+#pi1{
+  color: white;
+}
+
+
+.lets{
+  width: 400px;
+  background-color: rgba(252,188,22,255)
+  ;
+  border-radius: 10px;
+}
+
+
+.lets :hover{
+  cursor: pointer;
+}

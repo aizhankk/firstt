@@ -1,18 +1,27 @@
-{% extends 'main.html' %}
+<!-- {% extends 'main.html' %} -->
 
 {% block content%}
-<div>
+
+<link href="login.css" rel="stylesheet">
+
+<div class="body">
   <form method="POST" action="">
     {% csrf_token %}
 
-    <label>Username:</label>
-    <input type="text" name="username" placeholder="Enter Username" />
+    <div class="info">
+      <label>Username:</label>
+      
+      <input type="text" name="username" placeholder="Enter Username" />
+   
 
 
     <label>Password:</label>
+    
     <input type="password" name="password" placeholder="Enter Password" />
 
+    
     <input type="submit" name="Login"/>
+    </div>
 
   </form>
 </div>
