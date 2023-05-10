@@ -3,28 +3,25 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required, permission_required
 from django.http import HttpResponse
 from django.db.models import Q
-from .models import Room, Topic
+from .models import Room, Genre
 from .forms import RoomForm
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import permission_required
+from django.contrib.auth.decorators import user_passes_test
 
 
 def loginPage(request):
     if request.user.is_authenticated:
         return redirect('home')
 
-
     if request.method == 'POST':
-
         username = request.POST.get('username')
         password = request.POST.get('password')
-
         try:
             user = User.objects.get(username=username)
         except:
             messages.error(request, 'User does not exist')
-
 
         user = authenticate(request, username=username, password=password)
 
@@ -55,16 +52,18 @@ def home(request):
 
     rooms = Room.objects.filter(
         #Тут ищем по разным видам 
-        Q(topic__name__icontains=q) |
+        Q(genre__name__icontains=q) |
         Q(name__icontains = q) |
         Q(description__icontains = q)
     )
 
 
-    topics = Topic.objects.all()
+
+    genres = Genre.objects.all()
+
     room_count = rooms.count()
 
-    context = {'rooms': rooms, 'topics': topics, 'room_count': room_count}
+    context = {'rooms': rooms, 'genres': genres, 'room_count': room_count}
 
     return render(request, 'base/home.html', context)
 
@@ -83,7 +82,6 @@ def createRoom(request):
     form = RoomForm()
     if request.method == 'POST':
         form = RoomForm(request.POST)
-        #request.POST.get('name')
         if form.is_valid():
             form.save()
             return redirect('home')
@@ -98,8 +96,8 @@ def updateRoom(request, pk):
     room = Room.objects.get(id=pk)
     form = RoomForm(instance=room)
 
-    if request.user != room.host:
-        return HttpResponse('You are not allowed here!!')
+    # if request.user != room.host:
+    #     return HttpResponse('You are not allowed here!!')
 
 
     if request.method == 'POST':
@@ -115,11 +113,12 @@ def updateRoom(request, pk):
 
 
 @permission_required('base.delete_room', raise_exception=True)
+@user_passes_test(lambda u: u.is_superuser)
 def deleteRoom(request, pk):
     room = Room.objects.get(id=pk)
 
-    if request.user != room.host:
-        return HttpResponse('You are not allowed here!!')
+    # if request.user != room.host:
+    #     return HttpResponse('You are not allowed here!!')
     
     if request.method == 'POST':
         room.delete()

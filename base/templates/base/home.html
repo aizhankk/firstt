@@ -72,13 +72,13 @@
 
 <div class="home-cont">
     <div class="header">
-      <h3 style="font-size: 25px;">Programming Languages</h3>
+      <h3 style="font-size: 25px;">Genre of books</h3>
       <hr>
     </div> 
     <div class="all">
-    {% for topic in topics %}
+    {% for Genre in genres %}
     <div class="topics">
-      <a href="{% url 'home' %}?q={{topic.name}}">{{topic.name}}</a>
+      <a href="{% url 'home' %}?q={{Genre.name}}">{{Genre.name}}</a>
     </div>
     {% endfor %}
 
@@ -117,35 +117,27 @@
     {% for room in rooms %}
     <table class="tab">
       <tr>
-        <td>{{room.id}} . <a href="{% url 'room' room.id %}">{{room.name}}</a></td>
-
-
-
-
-        
+        <td>{{room.id}} . <a href="{% url 'room' room.id %}">{{room.name}}</a></td>        
         <td><a href="{% url 'update-room' room.id %}">Edit</a></td>
         <td><a href="{% url 'delete-room' room.id %}">Delete</a></td>
 
-
-
-
       </tr>
       
+
     </table>
     {% endfor %}
 
 
     {% for message in messages %}
     <div class="messages">
-      <a href="{% url 'home' %}?q={{message.body}}">{{topic.name}}</a>
+      <a href="{% url 'home' %}?q={{message.body}}">{{Genre.name}}</a>
+      <a>Hello</a>
     </div>
     {% endfor %}
 
 
-
-    <h3 style="margin-left: 160px;"><a href="{% url 'create-room' %}">Create student</a></h3>
+    <h3 style="margin-left: 160px;"><a href="{% url 'create-room' %}">Add new Book</a></h3>
     <h5>{{room_count}} rooms avail</h5>
-
   </div>
 </div>
 
